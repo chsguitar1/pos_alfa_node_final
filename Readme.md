@@ -1,102 +1,49 @@
-# Trabalho Node Js - Pos Alfa 2017
- [Link do Trabalho](https://github.com/suissa/pos-alfa-2017)
+# Projeto Final
 
-#### Modulos:
-* User(name, type, email)
-* Course(name, teacher, books, students)
-* Book(title, author, pages)
+Com base nos códigos previamente criados quero que você tenha os seguintes módulos:
 
-------------
+- User(name, type, email)
+- Course(name, teacher, books, students)
+- Book(title, author, pages)
 
+Onde 1 Course deverá ter **apenas** 1 User do type teacher, 
 
-#### Requisitos:
-- [x] 1 Course deverá ter apenas 1 User do type teacher
-- [x] método de pesquisa pelo name via **Query String** (com regex, **case insensitive**)
-- [x]  **Criar rota:**
-```
-api/course/:id/populate
-```
-- [ ] Refatorar seu código para utilizar
-Promises :anguished:
-------------
+O campo `students` deverá ser definido assim:
 
+```js
 
-##  **Rotas:**
-#### USERS
+students: [{ type: Schema.Types.ObjectId, ref: 'User' }]
 
-###### GET/POST:
-```
-http://localhost:3000/api/users/
-```
-###### Body para POST
-```
-{
-	"name":"Jao",
-	"age":33,
-	"email":"jao@email.com"
-}
 ```
 
-###### PUT/GET/DELETE:
-```
-http://localhost:3000/api/users/:id
-```
-###### GET findByName
-```
-http://localhost:3000/api/books/?&name=:title
+E o campo `books` assim:
+
+```js
+
+books: [{ type: Schema.Types.ObjectId, ref: 'Book' }]
+
 ```
 
-------------
+Fora as funções que já criamos quero que você implemente um método de pesquisa pelo `name`, <br>
+porém esse valor deve vir via QUERYSTRING e não via parâmetro do `req.params`!
 
+ps: No esqueça de utilizar REGEX para pesquisar com *case insensitive*!
 
-#### COURSES
-###### POST/GET:
-```
-http://localhost:3000/api/courses/
-```
-###### Body para POST
-```
-{
-	"name":"Node JS",
-	"teacher":"Suissa",
-	"students":["59ee7dbcd11d4d1fa0a42073", "59ee69b0b3f82e0714b99db7", ...],
-	"books":["59ee6ba558618a289cab3b6f", ...]
-}
-```
+Além das funções de CRUD você também precisará criar a seguinte rota:
 
-###### GET para POPULATE:
-```
-http://localhost:3000/api/courses/:id/populate
-```
-###### GET findByName
-```
-http://localhost:3000/api/books/?&name=:name
-```
+- api/course/:id/populate
 
-###### PUT/GET/DELETE:
-```
-http://localhost:3000/api/courses/:id
-```
+Onde você deverá usar a função de populate do Mongoose.
 
-------------
+> **No esqueça que TODAS as funções a serem utilizadas precisam estar na pasta (global) actions!!!**
 
+## Bônus
 
-####  BOOKS
-```
-http://localhost:3000/api/books/
-```
-###### Body para POST
-```
-{
-	"title":"Java Web Development"
-}
-```
-###### PUT/GET/DELETE:
-```
-http://localhost:3000/api/books/:id
-```
-###### GET findByName
-```
-http://localhost:3000/api/books/?&title=:title
-```
+Eu subi 2 exemplos usando Promises, caso você consiga refatorar seu código para utilizar<br> 
+Promises você já está com a vida ganha! ;)
 
+## Pesquisa necessária
+
+- [pegando parâmetros da URL no Express](http://expressjs.com/pt-br/api.html#req.param)
+  - **use o req.query!!!**
+- [relacionamento utilizando Mongoose](http://mongoosejs.com/docs/populate.html)
